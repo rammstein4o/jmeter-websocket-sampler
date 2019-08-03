@@ -1,6 +1,6 @@
 package rammstein4o.jmeter.samplers;
 
-import org.apache.jmeter.config.gui.AbstractConfigGui;
+import org.apache.jmeter.samplers.gui.AbstractSamplerGui;
 import org.apache.jmeter.testelement.TestElement;
 import java.awt.BorderLayout;
 import javax.swing.*;
@@ -11,7 +11,7 @@ import static javax.swing.BoxLayout.X_AXIS;
 import static javax.swing.BoxLayout.Y_AXIS;
 
 
-public class WebSocketSamplerGui extends AbstractConfigGui {
+public class WebSocketSamplerGui extends AbstractSamplerGui {
     private JTextField urlField;
     private JTextField tokenField;
     private JTextField publicTopicField;

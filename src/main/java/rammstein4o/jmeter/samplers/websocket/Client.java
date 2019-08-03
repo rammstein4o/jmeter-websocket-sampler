@@ -23,7 +23,6 @@ public class Client {
         WebSocketStompClient stompClient = new WebSocketStompClient(webSocketClient);
         stompClient.setMessageConverter(new MappingJackson2MessageConverter());
         stompClient.setTaskScheduler(new ConcurrentTaskScheduler());
-
         stompClient.connect(url, headers, sessionHandler);
 
         await().until(sessionHandler::isConnected);

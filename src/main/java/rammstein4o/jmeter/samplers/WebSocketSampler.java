@@ -66,19 +66,26 @@ public class WebSocketSampler extends AbstractSampler {
 
         SampleResult result = new SampleResult();
         result.setSampleLabel(getName());
-        result.setSamplerData("");
+        result.setSamplerData("Token used " + token + "\n");
 
         result.sampleStart();
-        Client wsClient = new Client();
 
-        wsClient.connect(token, url);
-        result.setSamplerData(result.getSamplerData() + "Connected to " + getUrl() + "\n");
+        try {
+            Client wsClient = new Client();
 
-        wsClient.subscribe(topic, getAppendSession());
-        result.setSamplerData(result.getSamplerData() + "Subscribed for " + topic + "\n");
+            wsClient.connect(token, url);
+            result.setSamplerData(result.getSamplerData() + "Connected to " + url + "\n");
 
-        result.sampleEnd();
-        result.setSuccessful(true);
+            wsClient.subscribe(topic, getAppendSession());
+            result.setSamplerData(result.getSamplerData() + "Subscribed for " + topic + "\n");
+            result.setSuccessful(true);
+        } catch (Throwable e) {
+            result.setSuccessful(false);
+            result.setResponseCode("Sampler Error");
+            result.setResponseMessage(e.getMessage());
+        } finally {
+            result.sampleEnd();
+        }
 
         return result;
     }
